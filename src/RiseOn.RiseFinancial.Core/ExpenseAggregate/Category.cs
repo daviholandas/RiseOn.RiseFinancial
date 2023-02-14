@@ -1,4 +1,4 @@
-﻿namespace RiseOn.RiseFinancial.Core.Entities;
+﻿namespace RiseOn.RiseFinancial.Core.ExpenseAggregate;
 
 public readonly struct Category
 {
@@ -9,6 +9,6 @@ public readonly struct Category
     private Category(string name)
         => _name = name;
 
-    public static implicit operator Category(string  name)
+    public static implicit operator Category(string name)
         => new Category(name);
 }
