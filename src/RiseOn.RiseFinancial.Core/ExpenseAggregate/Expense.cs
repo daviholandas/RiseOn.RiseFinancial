@@ -1,4 +1,6 @@
-﻿using RiseOn.Common.Domain;
+﻿using Ardalis.GuardClauses;
+using RiseOn.Common.Domain;
+using RiseOn.RiseFinancial.Core.ExpenseAggregate.Events;
 using Entity = RiseOn.Common.Domain.Record.Entity;
 
 namespace RiseOn.RiseFinancial.Core.ExpenseAggregate;
@@ -6,16 +8,26 @@ namespace RiseOn.RiseFinancial.Core.ExpenseAggregate;
 public record Expense : Entity, IAggregateRoot
 {
     public Expense(decimal value, string? description,
-        string recipient, PaymentType paymentType,
-        string category, Guid walletId)
+        string recipient, string category,
+        Guid walletId)
     {
-        Value = value;
+        Value = Guard.Against.NegativeOrZero(value, nameof(Value));
         Description = description;
         Recipient = recipient;
-        PaymentType = paymentType;
+        PaymentType = PaymentType.Debit;
         Category = category;
-        WalletId = walletId;
+        WalletId = Guard.Against.NullOrEmpty(walletId, nameof(WalletId));
         Status = Status.Open;
+    }
+    
+    public Expense(decimal value, string? description,
+        string recipient, string category,
+        Guid walletId, int installmentNumber)
+    : this(value, description, recipient,
+        category, walletId)
+    {
+        PaymentType = PaymentType.Credit;
+        InstallmentNumber = installmentNumber;
     }
 
     public decimal Value { get; private set; }
@@ -37,8 +49,12 @@ public record Expense : Entity, IAggregateRoot
     public void Postpone()
         => Status = Status.Postponed;
 
-    public void Settle()
-        => Status = Status.Payed;
+    public async ValueTask SettleAsync()
+    {
+        Status = Status.Payed;
+        await SendDomainEvent(new ExpenseSettledEvent(WalletId,
+            Value, Id));
+    }
 
     public void ChangeCategory(Category category)
         => Category = category;
