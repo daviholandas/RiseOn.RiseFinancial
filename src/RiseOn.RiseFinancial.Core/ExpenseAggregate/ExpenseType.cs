@@ -1,7 +1,7 @@
 ﻿namespace RiseOn.RiseFinancial.Core.ExpenseAggregate;
 
-public enum PaymentType
+public enum ExpenseType
 {
-    Credit,
-    Debit
+    Fixed,
+    Variable
 }

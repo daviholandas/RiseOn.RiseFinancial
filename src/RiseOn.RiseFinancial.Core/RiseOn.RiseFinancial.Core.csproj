@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <PackageReference Include="Ardalis.GuardClauses" Version="4.0.1" />
-    <PackageReference Include="CSharpFunctionalExtensions" Version="2.37.0" />
     <PackageReference Include="RiseOn.Common" Version="2.0.0-alpha" />
   </ItemGroup>
 

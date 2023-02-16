@@ -14,7 +14,7 @@ public record Expense : Entity, IAggregateRoot
         Value = Guard.Against.NegativeOrZero(value, nameof(Value));
         Description = description;
         Recipient = recipient;
-        PaymentType = PaymentType.Debit;
+        ExpenseType = ExpenseType.Variable;
         Category = category;
         WalletId = Guard.Against.NullOrEmpty(walletId, nameof(WalletId));
         Status = Status.Open;
@@ -26,7 +26,7 @@ public record Expense : Entity, IAggregateRoot
     : this(value, description, recipient,
         category, walletId)
     {
-        PaymentType = PaymentType.Credit;
+        ExpenseType = ExpenseType.Fixed;
         InstallmentNumber = installmentNumber;
     }
 
@@ -36,7 +36,7 @@ public record Expense : Entity, IAggregateRoot
 
     public string Recipient { get; private set; }
 
-    public PaymentType PaymentType { get; init; }
+    public ExpenseType ExpenseType { get; init; }
 
     public Category Category { get; private set; }
 
