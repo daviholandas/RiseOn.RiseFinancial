@@ -11,7 +11,7 @@ public class ValidationPipelineBehavior<TMessage,TResponse>
     public ValueTask<TResponse> Handle(TMessage message, 
         CancellationToken cancellationToken, 
         MessageHandlerDelegate<TMessage, TResponse> next)
-    {
+{
         throw new NotImplementedException();
     }
 }
