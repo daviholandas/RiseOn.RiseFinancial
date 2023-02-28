@@ -1,5 +1,5 @@
 ﻿using Mediator;
-using RiseOn.RiseFinancial.Application.UseCases.Expense;
+using RiseOn.RiseFinancial.Application.Commands.Expense;
 
 namespace RiseOn.RiseFinancial.WebApi.Endpoints;
 
@@ -13,12 +13,27 @@ public static class ExpenseEndpoints
             .WithTags("Expense")
             .WithOpenApi();
 
-        group.MapPost("fixed", async (IMediator mediator, CreateFixedExpenseCommand command) =>
-        {
-            var result = await mediator.Send(command);
-            return Results.Created($"{result.Value}", result.Value);
-        })
-            .Produces(StatusCodes.Status201Created);
+        group.MapPost("fixed", 
+                async (IMediator mediator, CreateFixedExpenseCommand command)
+                    => await mediator.Send(command)
+                switch 
+                {
+                    {IsSuccess: true} result =>  Results.Created($"{result.Value}", result.Value),
+                    var result => Results.BadRequest(result.Errors)
+                })
+            .Produces(StatusCodes.Status201Created)
+            .Produces(StatusCodes.Status400BadRequest);
+
+        group.MapPost("variable", 
+                async (IMediator mediator, CreateVariableExpenseCommand command)
+                    => await mediator.Send(command)
+                        switch 
+                        {
+                            { IsSuccess: true } result =>  Results.Created($"{result.Value}", result.Value),
+                            var result => Results.BadRequest(result.Errors)
+                        })
+            .Produces(StatusCodes.Status201Created)
+            .Produces(StatusCodes.Status400BadRequest);
 
         return builder;
     }
