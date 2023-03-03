@@ -1,13 +1,5 @@
- #addin nuget:?package=Cake.DotNetTool.Module
- #addin "nuget:?package=Cake.Sonar"
- #tool "nuget:?package=MSBuild.SonarQube.Runner.Tool"
+﻿#l "./devops/infra/dev_infra.cake"
 
-
-#l "./devops/cake/infra.cake"
-#l "./devops/cake/tests.cake"
-#l "./devops/cake/sonar.cake"
-#l "./devops/cake/service.cake"
-
-var target = Argument("target", "RunTests");
+var target = Argument("target", "Database");
 
 RunTarget(target);
