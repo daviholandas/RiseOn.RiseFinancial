@@ -25,12 +25,7 @@ public class CreateExpensesHandler :
     public ValueTask<Result<Guid>> Handle(CreateFixedExpenseCommand command,
         CancellationToken cancellationToken)
     {
-        ExpenseAggregate.Expense expense = new(
-            command.Value, command.Description,
-            command.Recipient, command.Category,
-            command.WalletId.Value, command.Installment);
-
-        return ValueTask.FromResult(Result<Guid>.Success(expense.Id));
+        throw new NotImplementedException();
     }
 
     public ValueTask<Result<Guid>> Handle(CreateVariableExpenseCommand command,
