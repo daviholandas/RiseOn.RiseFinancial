@@ -1,4 +1,5 @@
 using RiseOn.RiseFinancial.Application;
+using RiseOn.RiseFinancial.Infrastructure;
 using RiseOn.RiseFinancial.WebApi.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddApplicationIoC();
+builder.Services.AddApplicationIoC(builder.Configuration);
+builder.Services.AddInfrastructureDataServices(builder.Configuration);
 
 var app = builder.Build();
 

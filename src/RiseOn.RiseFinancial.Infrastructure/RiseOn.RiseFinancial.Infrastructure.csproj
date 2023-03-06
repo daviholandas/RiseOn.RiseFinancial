@@ -12,6 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\RiseOn.RiseFinancial.Application\RiseOn.RiseFinancial.Application.csproj" />
       <ProjectReference Include="..\RiseOn.RiseFinancial.Core\RiseOn.RiseFinancial.Core.csproj" />
     </ItemGroup>
 

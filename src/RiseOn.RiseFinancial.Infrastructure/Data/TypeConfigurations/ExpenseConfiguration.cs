@@ -11,7 +11,13 @@ public class ExpenseConfiguration : IEntityTypeConfiguration<Expense>
 
     public void Configure(EntityTypeBuilder<Expense> builder)
     {
-        builder.ToTable("Expenses");
+        builder.ToTable("Expenses",
+            table =>
+            {
+                table.IsMemoryOptimized();
+                table.IsTemporal(builder 
+                    => builder.UseHistoryTable("ExpenseHistory"));
+            });
 
         builder.Property(x => x.DueDate)
             .HasConversion<DateOnlyConverter, DateOnlyComparer>();
