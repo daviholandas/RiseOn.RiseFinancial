@@ -3,7 +3,7 @@ using Mediator;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RiseOn.RiseFinancial.Application.Configurations.BehaviourPipelines;
-using RiseOn.RiseFinancial.Application.Models;
+using RiseOn.RiseFinancial.CrossCutting.Models;
 
 namespace RiseOn.RiseFinancial.Application;
 
@@ -20,9 +20,9 @@ public static class ApplicationIoC
                 configuration.GetSection(nameof(ApplicationSettings)));
 
         serviceCollection
-            .AddMediator(config =>
-                config.ServiceLifetime = ServiceLifetime.Transient)
-            .AddTransient(typeof(IPipelineBehavior<,>),
+            .AddMediator(options => options.ServiceLifetime = ServiceLifetime.Scoped);
+
+        serviceCollection.AddScoped(typeof(IPipelineBehavior<,>),
                 typeof(ValidationPipelineBehaviour<,>));
 
         serviceCollection

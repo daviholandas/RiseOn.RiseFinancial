@@ -7,25 +7,27 @@ namespace RiseOn.RiseFinancial.Core.ExpenseAggregate;
 
 public record Expense : Entity, IAggregateRoot
 {
+    private Expense(){}
+    
     public Expense(decimal value, string? description,
-        string recipient, string category,
+        string recipient, Guid categoryId,
         Guid walletId)
     {
         Value = Guard.Against.NegativeOrZero(value, nameof(Value));
         Description = description;
         Recipient = recipient;
         ExpenseType = ExpenseType.Variable;
-        Category = category;
+        CategoryId = Guard.Against.NullOrEmpty(categoryId, nameof(CategoryId));
         WalletId = Guard.Against.NullOrEmpty(walletId, nameof(WalletId));
         Status = Status.Open;
         DueDate = DateOnly.FromDateTime(DateTime.Today);
     }
     
     public Expense(decimal value, string? description,
-        string recipient, string category,
+        string recipient, Guid categoryId,
         Guid walletId, int installmentNumber, DateOnly dueDate)
     : this(value, description, recipient,
-        category, walletId)
+        categoryId, walletId)
     {
         ExpenseType = ExpenseType.Fixed;
         InstallmentNumber = installmentNumber;
@@ -36,9 +38,11 @@ public record Expense : Entity, IAggregateRoot
 
     public string? Description { get; private set; }
 
-    public string Recipient { get; private set; }
+    public string? Recipient { get; private set; }
 
     public ExpenseType ExpenseType { get; init; }
+
+    public Guid CategoryId { get; private set; }
 
     public Category Category { get; private set; }
 
@@ -59,7 +63,4 @@ public record Expense : Entity, IAggregateRoot
         await SendDomainEvent(new ExpenseSettledEvent(WalletId,
             Value, Id));
     }
-
-    public void ChangeCategory(Category category)
-        => Category = category;
 }

@@ -4,18 +4,18 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace RiseOn.RiseFinancial.Infrastructure.Data.Converters;
 
-public class DateOnlyConverter : ValueConverter<DateOnly, DateTime>
+public class DateConverter : ValueConverter<DateOnly, DateTime>
 {
 
-    public DateOnlyConverter()
+    public DateConverter()
         : base(
             dateOnly => dateOnly.ToDateTime(TimeOnly.MinValue),
             dateTime => DateOnly.FromDateTime(dateTime)){}
 }
 
-public class DateOnlyComparer : ValueComparer<DateOnly>
+public class DateComparer : ValueComparer<DateOnly>
 {
-    public DateOnlyComparer() : base(
+    public DateComparer() : base(
         (d1, d2) => d1.DayNumber == d2.DayNumber,
         d => d.GetHashCode()){}
 }

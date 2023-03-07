@@ -1,6 +1,6 @@
 ﻿using Ardalis.Result;
 using Mediator;
-using ExpenseAggregate = RiseOn.RiseFinancial.Core.ExpenseAggregate;
+using RiseOn.RiseFinancial.Infrastructure.Data;
 
 namespace RiseOn.RiseFinancial.Application.Commands.Expense;
 
@@ -21,14 +21,14 @@ public class CreateExpensesHandler :
     ICommandHandler<CreateFixedExpenseCommand, Result<Guid>>, 
     ICommandHandler<CreateVariableExpenseCommand, Result<Guid>>
 {
-
+    private readonly RiseFinancialDbContext _dbContext;
     public ValueTask<Result<Guid>> Handle(CreateFixedExpenseCommand command,
         CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public ValueTask<Result<Guid>> Handle(CreateVariableExpenseCommand command,
+    public async ValueTask<Result<Guid>> Handle(CreateVariableExpenseCommand command,
         CancellationToken cancellationToken)
     {
         throw new NotImplementedException();

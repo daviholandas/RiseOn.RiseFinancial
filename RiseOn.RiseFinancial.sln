@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiseOn.RiseFinancial.Applic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiseOn.RiseFinancial.WebApi", "src\RiseOn.RiseFinancial.WebApi\RiseOn.RiseFinancial.WebApi.csproj", "{6879407F-C210-433F-8E71-D7F2600CDA24}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiseOn.RiseFinancial.CrossCutting", "src\RiseOn.RiseFinancial.CrossCutting\RiseOn.RiseFinancial.CrossCutting.csproj", "{9CB2A160-502F-4AD5-B05F-42076AC111FA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{6879407F-C210-433F-8E71-D7F2600CDA24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6879407F-C210-433F-8E71-D7F2600CDA24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6879407F-C210-433F-8E71-D7F2600CDA24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CB2A160-502F-4AD5-B05F-42076AC111FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CB2A160-502F-4AD5-B05F-42076AC111FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CB2A160-502F-4AD5-B05F-42076AC111FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CB2A160-502F-4AD5-B05F-42076AC111FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,14 +1,14 @@
-﻿namespace RiseOn.RiseFinancial.Core.ExpenseAggregate;
+﻿using Ardalis.GuardClauses;
+using Entity = RiseOn.Common.Domain.Record.Entity;
 
-public readonly struct Category
+namespace RiseOn.RiseFinancial.Core.ExpenseAggregate;
+
+public record Category : Entity
 {
-    private readonly string _name;
+    public Category(string name)
+        => Name = Guard.Against.NullOrWhiteSpace(name, nameof(Name));
 
-    public Guid Id => Guid.NewGuid();
+    public string Name { get; init; }
 
-    private Category(string name)
-        => _name = name;
-
-    public static implicit operator Category(string name)
-        => new Category(name);
+    public IEnumerable<Expense> Expenses { get; init; } = Enumerable.Empty<Expense>();
 }

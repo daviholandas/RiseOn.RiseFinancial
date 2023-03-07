@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Immutable;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using Ardalis.Result;
 using FluentValidation;
 using Mediator;
@@ -11,7 +9,7 @@ public class ValidationPipelineBehaviour<TMessage,TResponse>
     : IPipelineBehavior<TMessage, TResponse>
     where TMessage : IMessage
 {
-    private readonly Type _tMessageType = typeof(TMessage);
+    private readonly Type _tResponseType = typeof(TResponse);
     private readonly IEnumerable<IValidator<TMessage>> _validators;
 
     public ValidationPipelineBehaviour(
@@ -24,8 +22,11 @@ public class ValidationPipelineBehaviour<TMessage,TResponse>
         CancellationToken cancellationToken, 
         MessageHandlerDelegate<TMessage, TResponse> next)
     {
+        if (!_tResponseType.IsAssignableTo(typeof(IResult)))
+            return await ErrorReturn(new []{"The IRequest don't use the Result pattern."});
+        
         if (!_validators.Any())
-            return await next(message, cancellationToken);
+            return await ErrorReturn(new []{ $"The {typeof(TMessage).Name} has no validator." });
 
         ValidationContext<object> validationContext = new(message);
 
@@ -39,7 +40,10 @@ public class ValidationPipelineBehaviour<TMessage,TResponse>
             .Select(x => $"{x.PropertyName}: {x.ErrorMessage}")
             .ToArray();
 
-        return await ValueTask.FromResult(BuildResultInstance(failureMessages));
+        if (failureMessages.Any())
+            return await ErrorReturn(failureMessages);
+        
+        return await next(message, cancellationToken);
     }
 
     private static TResponse BuildResultInstance(IEnumerable<string> errors)
@@ -52,4 +56,7 @@ public class ValidationPipelineBehaviour<TMessage,TResponse>
 
         return resultError();
     }
+
+    private ValueTask<TResponse> ErrorReturn(IEnumerable<string> errorsMessages)
+        => ValueTask.FromResult(BuildResultInstance(errorsMessages));
 }

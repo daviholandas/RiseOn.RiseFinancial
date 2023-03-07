@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RiseOn.RiseFinancial.Application.Models;
+using RiseOn.RiseFinancial.CrossCutting.Models;
 using RiseOn.RiseFinancial.Infrastructure.Data;
 
 namespace RiseOn.RiseFinancial.Infrastructure;
@@ -14,14 +14,14 @@ public static class InfrastructureIoC
         var applicationSettings = configuration
             .GetSection(nameof(ApplicationSettings))
             .Get<ApplicationSettings>();
-        
+
         serviceCollection.AddSqlServer<RiseFinancialDbContext>(
-            applicationSettings!.Database!.ConnectionUrl,
+            applicationSettings!.Database!.ConnectionUrl, 
             options =>
-        {
-            options.EnableRetryOnFailure(3);
-        });
-        
+            {
+                options.EnableRetryOnFailure(3);
+            });
+
         return serviceCollection;
     }
 }

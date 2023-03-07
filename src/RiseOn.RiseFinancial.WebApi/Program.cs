@@ -23,7 +23,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.AddExpenseEndpoints();
+app
+    .AddExpenseEndpoints()
+    .AddCategoryEndpoints();
 
 app.Run();
 

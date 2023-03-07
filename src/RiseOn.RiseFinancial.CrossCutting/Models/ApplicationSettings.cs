@@ -1,4 +1,4 @@
-﻿namespace RiseOn.RiseFinancial.Application.Models;
+﻿namespace RiseOn.RiseFinancial.CrossCutting.Models;
 
 public class ApplicationSettings
 {
@@ -7,5 +7,5 @@ public class ApplicationSettings
 
 public class DatabaseSettings
 {
-    public string? ConnectionUrl { get; set; }
+    public string ConnectionUrl { get; set; } = string.Empty;
 }

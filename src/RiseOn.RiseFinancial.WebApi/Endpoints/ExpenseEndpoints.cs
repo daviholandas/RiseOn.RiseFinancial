@@ -18,7 +18,7 @@ public static class ExpenseEndpoints
                     => await mediator.Send(command)
                 switch 
                 {
-                    {IsSuccess: true} result =>  Results.Created($"{result.Value}", result.Value),
+                    { IsSuccess: true } result =>  Results.Created($"{result.Value}", result.Value),
                     var result => Results.BadRequest(result.Errors)
                 })
             .Produces(StatusCodes.Status201Created)
