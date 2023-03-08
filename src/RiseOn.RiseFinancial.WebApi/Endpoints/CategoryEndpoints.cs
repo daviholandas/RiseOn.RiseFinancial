@@ -1,5 +1,7 @@
-﻿using Mediator;
+﻿using Ardalis.Result;
+using Mediator;
 using RiseOn.RiseFinancial.Application.Commands.Category;
+using RiseOn.RiseFinancial.Infrastructure.Data.Queries.Category;
 
 namespace RiseOn.RiseFinancial.WebApi.Endpoints;
 
@@ -23,8 +25,22 @@ public static class CategoryEndpoints
         .Produces(StatusCodes.Status201Created)
         .Produces(StatusCodes.Status400BadRequest);
 
-        group.MapGet("{id:guid}", () => Results.Ok())
-            .WithName("GetCategoryById");
+        group.MapGet("{id:guid}", async (Guid id, IMediator mediator)
+                => await mediator.Send(new GetCategoryByIdQuery(id))
+                    switch
+                    {
+                        { IsSuccess: true } result => Results.Ok(result.Value),
+                        { Status: ResultStatus.NotFound } => Results.NotFound(),
+                        _ => Results.BadRequest()
+                    })
+            .WithName("GetCategoryById")
+            .Produces(StatusCodes.Status201Created)
+            .Produces(StatusCodes.Status400BadRequest)
+            .Produces(StatusCodes.Status404NotFound);
+
+        group.MapGet("", async (IMediator mediator) 
+                => (await mediator.Send(new GetAllCategoriesQuery())).Value)
+            .Produces(StatusCodes.Status200OK);
 
         return routeBuilder;
     }

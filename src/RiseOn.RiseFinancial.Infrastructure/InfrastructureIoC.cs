@@ -17,10 +17,8 @@ public static class InfrastructureIoC
 
         serviceCollection.AddSqlServer<RiseFinancialDbContext>(
             applicationSettings!.Database!.ConnectionUrl, 
-            options =>
-            {
-                options.EnableRetryOnFailure(3);
-            });
+            options => options.EnableRetryOnFailure(3), 
+            optionBuilder => optionBuilder.EnableSensitiveDataLogging(true));
 
         return serviceCollection;
     }

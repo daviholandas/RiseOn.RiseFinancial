@@ -10,6 +10,7 @@ public class ValidationPipelineBehaviour<TMessage,TResponse>
     where TMessage : IMessage
 {
     private readonly Type _tResponseType = typeof(TResponse);
+    private readonly Type _tMessageType = typeof(TMessage);
     private readonly IEnumerable<IValidator<TMessage>> _validators;
 
     public ValidationPipelineBehaviour(
@@ -25,7 +26,7 @@ public class ValidationPipelineBehaviour<TMessage,TResponse>
         if (!_tResponseType.IsAssignableTo(typeof(IResult)))
             return await ErrorReturn(new []{"The IRequest don't use the Result pattern."});
         
-        if (!_validators.Any())
+        if (!_validators.Any() && _tMessageType.IsAssignableTo(typeof(ICommand)))
             return await ErrorReturn(new []{ $"The {typeof(TMessage).Name} has no validator." });
 
         ValidationContext<object> validationContext = new(message);
