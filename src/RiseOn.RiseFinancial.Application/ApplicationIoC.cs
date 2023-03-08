@@ -1,4 +1,6 @@
 ﻿using FluentValidation;
+using Mapster;
+using MapsterMapper;
 using Mediator;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,15 +20,30 @@ public static class ApplicationIoC
         serviceCollection
             .Configure<ApplicationSettings>(
                 configuration.GetSection(nameof(ApplicationSettings)));
-
+        
+        //Mediator
         serviceCollection
             .AddMediator(options => options.ServiceLifetime = ServiceLifetime.Scoped);
 
         serviceCollection.AddScoped(typeof(IPipelineBehavior<,>),
                 typeof(ValidationPipelineBehaviour<,>));
-
+       
+        //FluentValidation
         serviceCollection
             .AddValidatorsFromAssemblies(assemblies);
+        
+        //Mappers
+        var mapsterConfig = new TypeAdapterConfig
+        {
+            AllowImplicitDestinationInheritance = true,
+            RequireExplicitMapping = true,
+            RequireDestinationMemberSource = true,
+            Compiler = exp => exp.Compile()
+        };
+        mapsterConfig.Scan(assemblies);
+        serviceCollection
+            .AddSingleton(mapsterConfig)
+            .AddTransient<IMapper, ServiceMapper>();
 
         return serviceCollection;
     }

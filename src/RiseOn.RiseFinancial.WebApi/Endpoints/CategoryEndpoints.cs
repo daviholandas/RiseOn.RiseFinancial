@@ -14,6 +14,13 @@ public static class CategoryEndpoints
             .WithTags("Category")
             .WithOpenApi();
 
+        Delegate handler = async (ICommand command, IMediator mediator)
+            => await mediator.Send(command) switch
+            {
+                {}
+                _ => Results.BadRequest()
+            };
+
         group.MapPost("", async (IMediator mediator, CreateCategoryCommand command)
                 => await mediator.Send(command)
                     switch
@@ -42,6 +49,14 @@ public static class CategoryEndpoints
                 => (await mediator.Send(new GetAllCategoriesQuery())).Value)
             .Produces(StatusCodes.Status200OK);
 
+        group.MapPut("", async (UpdateCategoryByIdCommand command, IMediator mediator)
+            => await mediator.Send(command)
+                switch
+                {
+                    { IsSuccess: true } result => Results.Accepted(),
+                    { Status: ResultStatus.NotFound } => Results.NotFound(),
+                    _ => Results.BadRequest()
+                });
         return routeBuilder;
     }
 }

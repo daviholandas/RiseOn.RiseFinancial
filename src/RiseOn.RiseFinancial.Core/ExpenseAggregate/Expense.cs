@@ -20,18 +20,18 @@ public record Expense : Entity, IAggregateRoot
         CategoryId = Guard.Against.NullOrEmpty(categoryId, nameof(CategoryId));
         WalletId = Guard.Against.NullOrEmpty(walletId, nameof(WalletId));
         Status = Status.Open;
-        DueDate = DateOnly.FromDateTime(DateTime.Today);
+        DueDay = DateTime.Today.Day;
     }
     
     public Expense(decimal value, string? description,
         string recipient, Guid categoryId,
-        Guid walletId, int installmentNumber, DateOnly dueDate)
+        Guid walletId, int installmentNumber, int? dueDay)
     : this(value, description, recipient,
         categoryId, walletId)
     {
         ExpenseType = ExpenseType.Fixed;
         InstallmentNumber = installmentNumber;
-        DueDate = dueDate;
+        DueDay = dueDay ?? DateTime.Today.Day;
     }
 
     public decimal Value { get; private set; }
@@ -52,7 +52,7 @@ public record Expense : Entity, IAggregateRoot
 
     public int InstallmentNumber { get; init; } = 1;
 
-    public DateOnly DueDate { get; private set; }
+    public int DueDay { get; private set; }
 
     public void Postpone()
         => Status = Status.Postponed;
