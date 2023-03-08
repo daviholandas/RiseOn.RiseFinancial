@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RiseOn.RiseFinancial.Core.ExpenseAggregate;
-using RiseOn.RiseFinancial.Infrastructure.Data.Converters;
 
 namespace RiseOn.RiseFinancial.Infrastructure.Data.TypeConfigurations;
 
@@ -17,8 +16,5 @@ public class ExpenseConfiguration : IEntityTypeConfiguration<Expense>
             });
 
         builder.HasKey(x => x.Id);
-
-        builder.Property(x => x.DueDate)
-            .HasConversion<DateConverter, DateComparer>();
     }
 }
