@@ -1,7 +1,8 @@
 ﻿using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using RiseOn.RiseFinancial.Application.Extensions.Validators;
-using RiseOn.RiseFinancial.Infrastructure.Data;
+using RiseOn.RiseFinancial.Infra.Data;
+using RiseOn.RiseFinancial.Infra.Data.Data;
 
 namespace RiseOn.RiseFinancial.Application.Commands.Expense.Validations;
 

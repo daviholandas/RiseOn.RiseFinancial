@@ -1,8 +1,7 @@
-﻿using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace RiseOn.RiseFinancial.Infrastructure.Data.Converters;
+namespace RiseOn.RiseFinancial.Infra.Data.Converters;
 
 public class DateConverter : ValueConverter<DateOnly, DateTime>
 {

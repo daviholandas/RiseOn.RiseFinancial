@@ -8,7 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\RiseOn.RiseFinancial.Core\RiseOn.RiseFinancial.Core.csproj" />
-      <ProjectReference Include="..\RiseOn.RiseFinancial.Infrastructure\RiseOn.RiseFinancial.Infrastructure.csproj" />
+      <ProjectReference Include="..\RiseOn.RiseFinancial.Infra.Data\RiseOn.RiseFinancial.Infra.Data.csproj" />
     </ItemGroup>
 
     <ItemGroup>

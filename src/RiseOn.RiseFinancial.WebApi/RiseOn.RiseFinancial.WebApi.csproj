@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RiseOn.RiseFinancial.Application\RiseOn.RiseFinancial.Application.csproj" />
-    <ProjectReference Include="..\RiseOn.RiseFinancial.Infrastructure\RiseOn.RiseFinancial.Infrastructure.csproj" />
+    <ProjectReference Include="..\RiseOn.RiseFinancial.Infra.Data\RiseOn.RiseFinancial.Infra.Data.csproj" />
   </ItemGroup>
 
 </Project>

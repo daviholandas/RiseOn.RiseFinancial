@@ -5,11 +5,10 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using RiseOn.RiseFinancial.Infrastructure.Data;
 
 #nullable disable
 
-namespace RiseOn.RiseFinancial.Infrastructure.Data.Migrations
+namespace RiseOn.RiseFinancial.Infra.Data.Data.Migrations
 {
     [DbContext(typeof(RiseFinancialDbContext))]
     [Migration("20230308160216_DueDayAdd")]

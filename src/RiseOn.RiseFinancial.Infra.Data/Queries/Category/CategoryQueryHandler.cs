@@ -1,12 +1,11 @@
-﻿using Ardalis.Result;
-using Mediator;
+﻿using Mediator;
 using Microsoft.EntityFrameworkCore;
 
-namespace RiseOn.RiseFinancial.Infrastructure.Data.Queries.Category;
+namespace RiseOn.RiseFinancial.Infra.Data.Queries.Category;
 
 public class CategoryQueryHandler : 
-    IQueryHandler<GetAllCategoriesQuery, Result<IEnumerable<CategoryQueryResult>>>,
-    IQueryHandler<GetCategoryByIdQuery, Result<CategoryQueryResult>>
+    IQueryHandler<GetAllCategoriesQuery, Ardalis.Result.Result<IEnumerable<CategoryQueryResult>>>,
+    IQueryHandler<GetCategoryByIdQuery, Ardalis.Result.Result<CategoryQueryResult>>
 
 {
     private readonly RiseFinancialDbContext _dbContext;
@@ -16,16 +15,16 @@ public class CategoryQueryHandler :
         _dbContext = dbContext;
     }
 
-    public async ValueTask<Result<IEnumerable<CategoryQueryResult>>> Handle(
+    public async ValueTask<Ardalis.Result.Result<IEnumerable<CategoryQueryResult>>> Handle(
         GetAllCategoriesQuery query,
         CancellationToken cancellationToken)
-        => Result<IEnumerable<CategoryQueryResult>>
+        => Ardalis.Result.Result<IEnumerable<CategoryQueryResult>>
             .Success(await _dbContext.Categories
             .AsNoTracking()
             .Select(x => new CategoryQueryResult(x.Id, x.Name))
             .ToListAsync(cancellationToken));
 
-    public async ValueTask<Result<CategoryQueryResult>> Handle(
+    public async ValueTask<Ardalis.Result.Result<CategoryQueryResult>> Handle(
         GetCategoryByIdQuery query,
         CancellationToken cancellationToken)
     {
@@ -36,7 +35,7 @@ public class CategoryQueryHandler :
             .FirstOrDefaultAsync(cancellationToken);
         
         return category is null ?
-            Result<CategoryQueryResult>.NotFound() : 
-            Result<CategoryQueryResult>.Success(category);
+            Ardalis.Result.Result<CategoryQueryResult>.NotFound() : 
+            Ardalis.Result.Result<CategoryQueryResult>.Success(category);
     }
 }

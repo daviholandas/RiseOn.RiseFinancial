@@ -2,7 +2,7 @@
 using Mediator;
 using Microsoft.AspNetCore.Mvc;
 using RiseOn.RiseFinancial.Application.Commands.Category;
-using RiseOn.RiseFinancial.Infrastructure.Data.Queries.Category;
+using RiseOn.RiseFinancial.Infra.Data.Queries.Category;
 using IResult = Ardalis.Result.IResult;
 
 namespace RiseOn.RiseFinancial.WebApi.Endpoints;

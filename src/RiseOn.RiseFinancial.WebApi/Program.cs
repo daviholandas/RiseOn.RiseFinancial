@@ -1,5 +1,5 @@
 using RiseOn.RiseFinancial.Application;
-using RiseOn.RiseFinancial.Infrastructure;
+using RiseOn.RiseFinancial.Infra.Data;
 using RiseOn.RiseFinancial.WebApi.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +26,8 @@ app.UseHttpsRedirection();
 app
     .AddExpenseEndpoints()
     .AddCategoryEndpoints();
+
+app.MapGraphQL();
 
 app.Run();
 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace RiseOn.RiseFinancial.Infrastructure.Data.Migrations
+namespace RiseOn.RiseFinancial.Infra.Data.Data.Migrations
 {
     /// <inheritdoc />
     public partial class Initial : Migration

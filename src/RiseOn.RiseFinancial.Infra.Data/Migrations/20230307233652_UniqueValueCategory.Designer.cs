@@ -3,17 +3,19 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using RiseOn.RiseFinancial.Infrastructure.Data;
 
 #nullable disable
 
-namespace RiseOn.RiseFinancial.Infrastructure.Data.Migrations
+namespace RiseOn.RiseFinancial.Infra.Data.Data.Migrations
 {
     [DbContext(typeof(RiseFinancialDbContext))]
-    partial class RiseFinancialDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230307233652_UniqueValueCategory")]
+    partial class UniqueValueCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,8 +86,8 @@ namespace RiseOn.RiseFinancial.Infrastructure.Data.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<int>("DueDay")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("DueDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ExpenseType")
                         .IsRequired()

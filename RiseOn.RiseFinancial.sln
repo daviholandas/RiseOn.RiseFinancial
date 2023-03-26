@@ -5,13 +5,17 @@ VisualStudioVersion = 17.5.33402.96
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiseOn.RiseFinancial.Core", "src\RiseOn.RiseFinancial.Core\RiseOn.RiseFinancial.Core.csproj", "{0B2E1B7A-D386-4232-8261-EE31EF514430}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiseOn.RiseFinancial.Infrastructure", "src\RiseOn.RiseFinancial.Infrastructure\RiseOn.RiseFinancial.Infrastructure.csproj", "{2C2A79A0-62E9-4692-93CF-24AFCC67B124}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiseOn.RiseFinancial.Infra.Data", "src\RiseOn.RiseFinancial.Infra.Data\RiseOn.RiseFinancial.Infra.Data.csproj", "{2C2A79A0-62E9-4692-93CF-24AFCC67B124}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiseOn.RiseFinancial.Application", "src\RiseOn.RiseFinancial.Application\RiseOn.RiseFinancial.Application.csproj", "{8510DEC4-BA25-46B2-8010-2D99374BFB53}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiseOn.RiseFinancial.WebApi", "src\RiseOn.RiseFinancial.WebApi\RiseOn.RiseFinancial.WebApi.csproj", "{6879407F-C210-433F-8E71-D7F2600CDA24}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiseOn.RiseFinancial.CrossCutting", "src\RiseOn.RiseFinancial.CrossCutting\RiseOn.RiseFinancial.CrossCutting.csproj", "{9CB2A160-502F-4AD5-B05F-42076AC111FA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F5473F8F-D9E8-4548-96C0-95F002FE1FA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiseOn.Financial.IntegrationTests", "tests\RiseOn.Financial.IntegrationTests\RiseOn.Financial.IntegrationTests.csproj", "{38C7D0A5-D6B7-4197-AD77-BBEB96D78723}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,11 +43,18 @@ Global
 		{9CB2A160-502F-4AD5-B05F-42076AC111FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CB2A160-502F-4AD5-B05F-42076AC111FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CB2A160-502F-4AD5-B05F-42076AC111FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38C7D0A5-D6B7-4197-AD77-BBEB96D78723}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38C7D0A5-D6B7-4197-AD77-BBEB96D78723}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38C7D0A5-D6B7-4197-AD77-BBEB96D78723}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38C7D0A5-D6B7-4197-AD77-BBEB96D78723}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7F29F22B-CD4A-472B-AB56-CAD0E4FDADD4}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{38C7D0A5-D6B7-4197-AD77-BBEB96D78723} = {F5473F8F-D9E8-4548-96C0-95F002FE1FA3}
 	EndGlobalSection
 EndGlobal

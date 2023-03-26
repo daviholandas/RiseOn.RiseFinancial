@@ -6,7 +6,7 @@ namespace RiseOn.RiseFinancial.Core.ExpenseAggregate;
 public record Category : Entity
 {
     public Category(string name)
-        => Name = Guard.Against.NullOrWhiteSpace(name, nameof(Name));
+        => Name = name; //Guard.Against.NullOrWhiteSpace(name, nameof(Name));
 
     public string Name { get; init; }
 

@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace RiseOn.RiseFinancial.Infrastructure.Data.Migrations
+namespace RiseOn.RiseFinancial.Infra.Data.Data.Migrations
 {
     /// <inheritdoc />
     public partial class UniqueValueCategory : Migration

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using RiseOn.RiseFinancial.Core.ExpenseAggregate;
 
-namespace RiseOn.RiseFinancial.Infrastructure.Data;
+namespace RiseOn.RiseFinancial.Infra.Data;
 
 public class RiseFinancialDbContext : DbContext
 {
@@ -10,10 +10,10 @@ public class RiseFinancialDbContext : DbContext
         : base(options) { }
 
     public DbSet<Expense> Expenses
-        => Set<Expense>();
+        => this.Set<Expense>();
 
     public DbSet<Category> Categories
-        => Set<Category>();
+        => this.Set<Category>();
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RiseOn.RiseFinancial.Core.ExpenseAggregate;
 
-namespace RiseOn.RiseFinancial.Infrastructure.Data.TypeConfigurations;
+namespace RiseOn.RiseFinancial.Infra.Data.EntityConfigurations;
 
 public class ExpenseConfiguration : IEntityTypeConfiguration<Expense>
 {
